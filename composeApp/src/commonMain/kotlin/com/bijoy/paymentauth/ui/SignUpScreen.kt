@@ -43,8 +43,9 @@ fun SignUpScreen(
     onContinue: (username: String) -> Unit
 ) {
 
-    var username by remember { mutableStateOf("") }
-    val isValid = username.isNotBlank() && selectedImage != null
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    val isValid = name.isNotBlank() && email.isNotBlank() && selectedImage != null
 
     Column(
         modifier = Modifier
@@ -88,15 +89,15 @@ fun SignUpScreen(
         }
         Spacer(Modifier.height(16.dp))
         OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
+            value = name,
+            onValueChange = { name = it },
             singleLine = true,
             label = { Text("Enter your name") },
             modifier = Modifier.fillMaxWidth()
         )
         OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
+            value = email,
+            onValueChange = { email = it },
             singleLine = true,
             label = { Text("Enter your e-mail id") },
             modifier = Modifier.fillMaxWidth()
@@ -110,7 +111,7 @@ fun SignUpScreen(
         }
         Button(
             onClick = {
-                onContinue(username)
+                onContinue(name)
             },
             enabled = isValid,
             modifier = Modifier.fillMaxWidth()

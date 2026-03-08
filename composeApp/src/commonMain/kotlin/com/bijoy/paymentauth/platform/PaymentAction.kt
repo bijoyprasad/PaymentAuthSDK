@@ -1,6 +1,6 @@
 package com.bijoy.paymentauth.platform
 
-expect fun startPayment(
+expect fun paymentAction(
     onSuccess: (paymentId: String) -> Unit,
     onError: (code: Int, message: String) -> Unit
 )

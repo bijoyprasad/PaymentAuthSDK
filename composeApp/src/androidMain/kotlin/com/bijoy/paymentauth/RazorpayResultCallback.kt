@@ -1,16 +1,16 @@
-// androidMain: com/bijoy/paymentauth/RazorpayResultDispatcher.kt
+
 package com.bijoy.paymentauth
 
-internal object RazorpayResultDispatcher {
+internal object RazorpayResultCallback {
     var onSuccess: ((paymentId: String) -> Unit)? = null
     var onError: ((code: Int, message: String) -> Unit)? = null
 
-    fun deliverSuccess(paymentId: String) {
+    fun onSuccessCallback(paymentId: String) {
         onSuccess?.invoke(paymentId)
         clear()
     }
 
-    fun deliverError(code: Int, message: String) {
+    fun onErrorCallback(code: Int, message: String) {
         onError?.invoke(code, message)
         clear()
     }

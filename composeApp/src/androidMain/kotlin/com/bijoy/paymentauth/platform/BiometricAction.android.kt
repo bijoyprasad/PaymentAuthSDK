@@ -1,4 +1,4 @@
-// androidMain: com/bijoy/paymentauth/platform/BiometricAuth.android.kt
+
 package com.bijoy.paymentauth.platform
 
 import android.widget.Toast
@@ -7,12 +7,13 @@ import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
-import com.bijoy.paymentauth.SDKActivityTracker
+import com.bijoy.paymentauth.ActivityTracker
 
-actual fun authenticate(onSuccess: () -> Unit) {
-    val activity = SDKActivityTracker.requireCurrentActivity()
+actual fun biometricAction(
+    onSuccess: () -> Unit
+) {
+    val activity = ActivityTracker.requireCurrentActivity()
 
-    // 1. Check if biometric is available
     val biometricManager = BiometricManager.from(activity)
     val canAuthenticate = biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
 
@@ -25,14 +26,12 @@ actual fun authenticate(onSuccess: () -> Unit) {
         return
     }
 
-    // 2. Build the prompt info
     val promptInfo = BiometricPrompt.PromptInfo.Builder()
         .setTitle("Verify your identity")
         .setSubtitle("Authenticate to proceed with payment")
         .setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
         .build()
 
-    // 3. Set up callbacks
     val executor = ContextCompat.getMainExecutor(activity)
     val biometricPrompt = BiometricPrompt(
         activity,
@@ -41,14 +40,14 @@ actual fun authenticate(onSuccess: () -> Unit) {
 
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
-                onSuccess()   // ← triggers payment flow
+                onSuccess()
             }
 
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                 super.onAuthenticationError(errorCode, errString)
                 Toast.makeText(
                     activity,
-                    "Authentication error: $errString",
+                    errString,
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -64,6 +63,5 @@ actual fun authenticate(onSuccess: () -> Unit) {
         }
     )
 
-    // 4. Show the prompt
     biometricPrompt.authenticate(promptInfo)
 }

@@ -12,7 +12,6 @@ import com.bijoy.paymentauth.navigation.SignUpRoute
 @Composable
 fun App(
     selectedImage: ImageBitmap? = null,
-    //handle this each platform specifically
     onPickImage: () -> Unit = {},
     onDoPaymentClick: () -> Unit = {}
 ) {

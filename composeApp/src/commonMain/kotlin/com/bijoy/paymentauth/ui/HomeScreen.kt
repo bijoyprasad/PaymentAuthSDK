@@ -28,7 +28,7 @@ fun HomeScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Welcome back",
+            text = "Complete your payment",
             style = MaterialTheme.typography.titleMedium
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -36,7 +36,7 @@ fun HomeScreen(
             text = username,
             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
         )
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(42.dp))
         Button(
             onClick = onDoPaymentClick
         ) {

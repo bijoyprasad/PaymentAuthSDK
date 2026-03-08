@@ -1,4 +1,4 @@
-// androidMain: com/bijoy/paymentauth/SDKActivityTracker.kt
+
 package com.bijoy.paymentauth
 
 import android.app.Activity
@@ -6,7 +6,7 @@ import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import java.lang.ref.WeakReference
-internal object SDKActivityTracker : Application.ActivityLifecycleCallbacks {
+internal object ActivityTracker : Application.ActivityLifecycleCallbacks {
 
     private var currentActivity: WeakReference<FragmentActivity>? = null
 
@@ -41,15 +41,13 @@ internal object SDKActivityTracker : Application.ActivityLifecycleCallbacks {
         }
     }
 
-    // ← removed onActivityPaused clearing, BiometricPrompt pauses the activity!
-
-    override fun onActivityPaused(activity: Activity) {} // ← do nothing
+    override fun onActivityPaused(activity: Activity) {}
 
     override fun onActivityStopped(activity: Activity) {}
 
     override fun onActivityDestroyed(activity: Activity) {
         if (currentActivity?.get() == activity) {
-            currentActivity = null  // ← only clear when truly gone
+            currentActivity = null
         }
     }
 

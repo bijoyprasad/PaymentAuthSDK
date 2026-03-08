@@ -2,6 +2,8 @@ package com.bijoy.paymentauth.platform
 
 import androidx.compose.ui.graphics.ImageBitmap
 
-expect fun pickImage(
+actual fun imagePickAction(
     onResult: (ImageBitmap?) -> Unit
-)
+) {
+
+}

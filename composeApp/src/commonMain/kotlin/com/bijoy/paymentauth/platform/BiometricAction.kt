@@ -1,5 +1,5 @@
 package com.bijoy.paymentauth.platform
 
-expect fun authenticate(
+expect fun biometricAction(
     onSuccess: () -> Unit
 )
