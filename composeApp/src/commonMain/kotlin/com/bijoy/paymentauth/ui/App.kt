@@ -1,4 +1,4 @@
-package com.bijoy.paymentauth
+package com.bijoy.paymentauth.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.ImageBitmap
@@ -6,8 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.bijoy.paymentauth.routes.HomeRoute
-import com.bijoy.paymentauth.routes.SignUpRoute
+import com.bijoy.paymentauth.navigation.HomeRoute
+import com.bijoy.paymentauth.navigation.SignUpRoute
 
 @Composable
 fun App(

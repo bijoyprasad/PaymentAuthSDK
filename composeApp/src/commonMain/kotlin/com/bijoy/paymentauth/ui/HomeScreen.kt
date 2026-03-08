@@ -1,4 +1,4 @@
-package com.bijoy.paymentauth
+package com.bijoy.paymentauth.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

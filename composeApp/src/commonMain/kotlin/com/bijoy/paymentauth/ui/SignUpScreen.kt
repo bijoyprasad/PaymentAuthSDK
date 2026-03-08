@@ -1,7 +1,8 @@
-package com.bijoy.paymentauth
+package com.bijoy.paymentauth.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,8 +26,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -59,13 +60,14 @@ fun SignUpScreen(
         Spacer(Modifier.height(20.dp))
         Box(
             modifier = Modifier
-                .height(320.dp)
+                .height(280.dp)
                 .aspectRatio(3f/4f)
                 .clip(
                     RoundedCornerShape(
                         corner = CornerSize(20.dp),
                     )
-                ),
+                )
+                .clickable{ onPickImage() },
             contentAlignment = Alignment.Center
         ) {
             if (selectedImage != null) {
@@ -89,7 +91,14 @@ fun SignUpScreen(
             value = username,
             onValueChange = { username = it },
             singleLine = true,
-            label = { Text("Enter Username") },
+            label = { Text("Enter your name") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = username,
+            onValueChange = { username = it },
+            singleLine = true,
+            label = { Text("Enter your e-mail id") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.height(16.dp))

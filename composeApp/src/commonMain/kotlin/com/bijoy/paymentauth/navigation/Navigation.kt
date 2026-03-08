@@ -1,4 +1,4 @@
-package com.bijoy.paymentauth.routes
+package com.bijoy.paymentauth.navigation
 
 import kotlinx.serialization.Serializable
 
