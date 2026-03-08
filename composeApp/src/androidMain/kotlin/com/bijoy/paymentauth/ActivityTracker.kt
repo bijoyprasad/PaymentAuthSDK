@@ -1,4 +1,3 @@
-
 package com.bijoy.paymentauth
 
 import android.app.Activity
@@ -6,6 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import java.lang.ref.WeakReference
+
 internal object ActivityTracker : Application.ActivityLifecycleCallbacks {
 
     private var currentActivity: WeakReference<FragmentActivity>? = null
@@ -14,14 +14,14 @@ internal object ActivityTracker : Application.ActivityLifecycleCallbacks {
         app.registerActivityLifecycleCallbacks(this)
     }
 
-    fun getCurrentActivity(): FragmentActivity? = currentActivity?.get()
-
     fun requireCurrentActivity(): FragmentActivity =
-        getCurrentActivity()
-            ?: throw IllegalStateException(
-                "PaymentSDK is not initialized. " +
-                        "Call PaymentSDK.init(application) in your Application.onCreate() before using the SDK."
-            )
+        getCurrentActivity() ?: throw IllegalStateException(
+            "PaymentSDK is not initialized. " +
+                    "Call PaymentSDK.init(application) in your Application.onCreate() before using the SDK."
+        )
+
+    private fun getCurrentActivity(): FragmentActivity? = currentActivity?.get()
+
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         if (activity is FragmentActivity) {

@@ -1,7 +1,7 @@
 
 package com.bijoy.paymentauth
 
-internal object RazorpayResultCallback {
+internal object PaymentResultCallback {
     var onSuccess: ((paymentId: String) -> Unit)? = null
     var onError: ((code: Int, message: String) -> Unit)? = null
 

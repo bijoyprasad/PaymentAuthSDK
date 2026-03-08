@@ -3,7 +3,7 @@ package com.bijoy.paymentauth.platform
 import android.content.Intent
 import com.bijoy.paymentauth.ActivityTracker
 import com.bijoy.paymentauth.PaymentManagerActivity
-import com.bijoy.paymentauth.RazorpayResultCallback
+import com.bijoy.paymentauth.PaymentResultCallback
 
 actual fun paymentAction(
     onSuccess: (paymentId: String) -> Unit,
@@ -11,8 +11,8 @@ actual fun paymentAction(
 ) {
     val context = ActivityTracker.requireCurrentActivity()
 
-    RazorpayResultCallback.onSuccess = onSuccess
-    RazorpayResultCallback.onError = onError
+    PaymentResultCallback.onSuccess = onSuccess
+    PaymentResultCallback.onError = onError
 
     val intent = Intent(context, PaymentManagerActivity::class.java).apply {
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

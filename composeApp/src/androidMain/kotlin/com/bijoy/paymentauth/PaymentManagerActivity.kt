@@ -29,18 +29,18 @@ internal class PaymentManagerActivity : FragmentActivity(), PaymentResultListene
             }
             checkout.open(this, options)
         } catch (e: Exception) {
-            RazorpayResultCallback.onErrorCallback(-1, e.message ?: "Unknown error")
+            PaymentResultCallback.onErrorCallback(-1, e.message ?: "Unknown error")
             finish()
         }
     }
 
     override fun onPaymentSuccess(razorpayPaymentID: String?) {
-        RazorpayResultCallback.onSuccessCallback(razorpayPaymentID ?: "")
+        PaymentResultCallback.onSuccessCallback(razorpayPaymentID ?: "")
         finish()
     }
 
     override fun onPaymentError(code: Int, response: String?) {
-        RazorpayResultCallback.onErrorCallback(code, response ?: "Payment failed")
+        PaymentResultCallback.onErrorCallback(code, response ?: "Payment failed")
         finish()
     }
 

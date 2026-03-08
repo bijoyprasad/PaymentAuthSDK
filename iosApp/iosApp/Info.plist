@@ -4,5 +4,11 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Used to take a profile photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Used to select a profile photo</string>
+	<key>NSFaceIDUsageDescription</key>
+    <string>Used to authenticate before making a payment</string>
 </dict>
 </plist>
