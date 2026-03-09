@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import com.bijoy.paymentauth.platform.biometricAction
 import com.bijoy.paymentauth.platform.paymentAction
 
-internal object CommonController {
+internal object Controller {
 
     val selectedImage = mutableStateOf<ImageBitmap?>(null)
 

@@ -1,4 +1,4 @@
-package com.bijoy.paymentauth
+package com.bijoy.paymentauth.manager
 
 import android.app.AlertDialog
 import android.content.Context
@@ -11,7 +11,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.fragment.app.FragmentActivity
-import com.bijoy.paymentauth.controller.CommonController
+import com.bijoy.paymentauth.config.PaymentInitializer
+import com.bijoy.paymentauth.controller.Controller
 import com.bijoy.paymentauth.ui.App
 
 internal class LaunchManager : FragmentActivity() {
@@ -24,17 +25,17 @@ internal class LaunchManager : FragmentActivity() {
             uri?.let {
                 val stream = contentResolver.openInputStream(it)
                 val bitmap = BitmapFactory.decodeStream(stream)
-                CommonController.selectedImage.value = bitmap?.asImageBitmap()
+                Controller.selectedImage.value = bitmap?.asImageBitmap()
             }
         }
 
         val cameraPicker = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
             bitmap?.let {
-                CommonController.selectedImage.value = it.asImageBitmap()
+                Controller.selectedImage.value = it.asImageBitmap()
             }
         }
 
-        CommonController.pickImageOverride = {
+        Controller.pickImageOverride = {
             AlertDialog.Builder(this)
                 .setTitle("Select Profile Image")
                 .setItems(arrayOf("Camera", "Gallery")) { _, index ->
@@ -46,31 +47,31 @@ internal class LaunchManager : FragmentActivity() {
                 .show()
         }
 
-        CommonController.onPaymentSuccess = { paymentId ->
-            PaymentSDK.onPaymentSuccess?.invoke(paymentId)
-            CommonController.reset()
+        Controller.onPaymentSuccess = { paymentId ->
+            PaymentInitializer.onPaymentSuccess?.invoke(paymentId)
+            Controller.reset()
             finish()
         }
 
-        CommonController.onPaymentError = { code, message ->
-            PaymentSDK.onPaymentError?.invoke(code, message)
-            CommonController.reset()
+        Controller.onPaymentError = { code, message ->
+            PaymentInitializer.onPaymentError?.invoke(code, message)
+            Controller.reset()
             finish()
         }
 
         setContent {
-            val selectedImage by CommonController.selectedImage
+            val selectedImage by Controller.selectedImage
             App(
                 selectedImage = selectedImage,
-                onPickImage = { CommonController.pickImage() },
-                onDoPaymentClick = { CommonController.startBiometric() }
+                onPickImage = { Controller.pickImage() },
+                onDoPaymentClick = { Controller.startBiometric() }
             )
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        CommonController.reset()
+        Controller.reset()
     }
 
     companion object {

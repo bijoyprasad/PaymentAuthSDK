@@ -6,8 +6,8 @@ import android.net.Uri
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
-import com.bijoy.paymentauth.ActivityTracker
-import com.bijoy.paymentauth.controller.CommonController
+import com.bijoy.paymentauth.config.ActivityTracker
+import com.bijoy.paymentauth.controller.Controller
 
 actual fun imagePickAction(
     onResult: (ImageBitmap?) -> Unit
@@ -21,7 +21,7 @@ actual fun imagePickAction(
         uri?.let {
             val stream = context.contentResolver.openInputStream(it)
             val bitmap = BitmapFactory.decodeStream(stream)
-            CommonController.selectedImage.value = bitmap?.asImageBitmap()
+            Controller.selectedImage.value = bitmap?.asImageBitmap()
         }
     }
 
@@ -30,7 +30,7 @@ actual fun imagePickAction(
         ActivityResultContracts.TakePicturePreview()
     ) { bitmap ->
         bitmap?.let {
-            CommonController.selectedImage.value = it.asImageBitmap()
+            Controller.selectedImage.value = it.asImageBitmap()
         }
     }
 

@@ -2,7 +2,7 @@ package com.bijoy.paymentauth.platform
 
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.toComposeImageBitmap
-import com.bijoy.paymentauth.controller.CommonController
+import com.bijoy.paymentauth.controller.Controller
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.addressOf
 import kotlinx.cinterop.usePinned
@@ -98,7 +98,7 @@ private fun presentPicker(
             val uiImage = (didFinishPickingMediaWithInfo[UIImagePickerControllerEditedImage]
                 ?: didFinishPickingMediaWithInfo[UIImagePickerControllerOriginalImage]) as? UIImage
             val imageBitmap = uiImage?.toImageBitmap()
-            CommonController.selectedImage.value = imageBitmap
+            Controller.selectedImage.value = imageBitmap
             onResult(imageBitmap)
         }
 

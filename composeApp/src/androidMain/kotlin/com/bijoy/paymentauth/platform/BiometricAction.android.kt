@@ -7,7 +7,7 @@ import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
-import com.bijoy.paymentauth.ActivityTracker
+import com.bijoy.paymentauth.config.ActivityTracker
 
 actual fun biometricAction(
     onSuccess: () -> Unit

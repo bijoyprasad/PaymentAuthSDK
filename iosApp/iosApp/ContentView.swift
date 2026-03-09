@@ -12,8 +12,20 @@ struct ComposeView: UIViewControllerRepresentable {
 
 struct ContentView: View {
     var body: some View {
-        ComposeView()
-            .ignoresSafeArea()
+        VStack {
+            ComposeView()
+                .ignoresSafeArea()
+            Button("Launch Payment SDK") {
+                LaunchPaymentSDK_iosKt.launchPaymentSDK(
+                    onSuccess: { paymentId in
+                        print("Payment Success: \(paymentId)")
+                    },
+                    onError: { code, message in
+                        print("Payment Error: \(code) - \(message)")
+                    }
+                )
+            }
+        }
     }
 }
 

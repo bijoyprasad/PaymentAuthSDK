@@ -1,5 +1,4 @@
-
-package com.bijoy.paymentauth
+package com.bijoy.paymentauth.config
 
 internal object PaymentResultCallback {
     var onSuccess: ((paymentId: String) -> Unit)? = null

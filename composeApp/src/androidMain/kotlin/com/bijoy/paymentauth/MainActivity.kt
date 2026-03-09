@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.FragmentActivity
+import com.bijoy.paymentauth.platform.launchPaymentSDK
 
 class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,7 @@ fun Greeting() {
         ) {
             Button(
                 onClick = {
-                    PaymentSDK.launch(
+                    launchPaymentSDK(
                         onSuccess = { paymentId -> println("Success")},
                         onError = { code, message -> println("Error" + code + message)}
                     )

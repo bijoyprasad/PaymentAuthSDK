@@ -1,7 +1,8 @@
-package com.bijoy.paymentauth
+package com.bijoy.paymentauth.manager
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import com.bijoy.paymentauth.config.PaymentResultCallback
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import org.json.JSONObject

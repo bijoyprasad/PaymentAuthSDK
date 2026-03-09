@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PaymentManager"
+            android:name=".manager.PaymentManager"
             android:exported="false" />
         <activity
-            android:name=".LaunchManager"
+            android:name=".manager.LaunchManager"
             android:exported="false" />
     </application>
 

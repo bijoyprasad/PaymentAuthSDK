@@ -1,11 +1,11 @@
 package com.bijoy.paymentauth.application
 
 import android.app.Application
-import com.bijoy.paymentauth.PaymentSDK
+import com.bijoy.paymentauth.config.PaymentInitializer
 
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        PaymentSDK.init(this)
+        PaymentInitializer.init(this)
     }
 }

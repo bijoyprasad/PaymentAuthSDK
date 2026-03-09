@@ -1,9 +1,9 @@
 package com.bijoy.paymentauth.platform
 
 import android.content.Intent
-import com.bijoy.paymentauth.ActivityTracker
-import com.bijoy.paymentauth.PaymentManager
-import com.bijoy.paymentauth.PaymentResultCallback
+import com.bijoy.paymentauth.config.ActivityTracker
+import com.bijoy.paymentauth.config.PaymentResultCallback
+import com.bijoy.paymentauth.manager.PaymentManager
 
 actual fun startNativePayment(
     onSuccess: (paymentId: String) -> Unit,

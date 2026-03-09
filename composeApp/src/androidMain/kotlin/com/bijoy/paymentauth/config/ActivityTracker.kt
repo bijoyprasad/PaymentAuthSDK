@@ -1,4 +1,4 @@
-package com.bijoy.paymentauth
+package com.bijoy.paymentauth.config
 
 import android.app.Activity
 import android.app.Application
