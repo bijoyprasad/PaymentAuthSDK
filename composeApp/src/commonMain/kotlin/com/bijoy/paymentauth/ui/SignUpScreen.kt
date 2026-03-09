@@ -129,7 +129,7 @@ fun SignUpScreen(
                 .padding(12.dp)
         ) {
             Text(
-                text = "Username and profile image are required.\nYour information are securely and not stored.",
+                text = "Profile image and user details are required\nYour information are secured and will not be used externally",
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = Color(0xFF800000),
