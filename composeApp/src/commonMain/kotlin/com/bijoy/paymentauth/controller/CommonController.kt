@@ -13,20 +13,18 @@ internal object CommonController {
     var onPaymentSuccess: ((paymentId: String) -> Unit)? = null
     var onPaymentError: ((code: Int, message: String) -> Unit)? = null
 
+    // Platform-specific — declared here, implemented per platform
     fun pickImage() {
-        imagePickAction {}
+         imagePickAction {}
     }
-
-    fun startBiometric() {
-        biometricAction {
-            paymentAction(
-                onSuccess = { paymentId ->
-                    onPaymentSuccess?.invoke(paymentId)
-                },
-                onError = { code, message ->
-                    onPaymentError?.invoke(code, message)
-                }
-            )
-        }
+    fun startBiometric() = biometricAction {
+        paymentAction(
+            onSuccess = { paymentId ->
+                onPaymentSuccess?.invoke(paymentId)
+            },
+            onError = { code, message ->
+                onPaymentError?.invoke(code, message)
+            }
+        )
     }
 }

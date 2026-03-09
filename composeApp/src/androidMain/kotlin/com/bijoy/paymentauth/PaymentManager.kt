@@ -6,7 +6,7 @@ import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
 import org.json.JSONObject
 
-internal class PaymentManagerActivity : FragmentActivity(), PaymentResultListener {
+internal class PaymentManager : FragmentActivity(), PaymentResultListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

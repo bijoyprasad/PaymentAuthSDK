@@ -2,7 +2,7 @@ package com.bijoy.paymentauth.platform
 
 import android.content.Intent
 import com.bijoy.paymentauth.ActivityTracker
-import com.bijoy.paymentauth.PaymentManagerActivity
+import com.bijoy.paymentauth.PaymentManager
 import com.bijoy.paymentauth.PaymentResultCallback
 
 actual fun paymentAction(
@@ -14,7 +14,7 @@ actual fun paymentAction(
     PaymentResultCallback.onSuccess = onSuccess
     PaymentResultCallback.onError = onError
 
-    val intent = Intent(context, PaymentManagerActivity::class.java).apply {
+    val intent = Intent(context, PaymentManager::class.java).apply {
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
     context.startActivity(intent)

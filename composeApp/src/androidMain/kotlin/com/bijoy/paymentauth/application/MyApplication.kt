@@ -1,11 +1,11 @@
 package com.bijoy.paymentauth.application
 
 import android.app.Application
-import com.bijoy.paymentauth.ActivityTracker
+import com.bijoy.paymentauth.PaymentSDK
 
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        ActivityTracker.register(this)
+        PaymentSDK.init(this)
     }
 }
