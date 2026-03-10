@@ -16,6 +16,7 @@ fun App(
     onDoPaymentClick: () -> Unit = {}
 ) {
 
+
     val navController = rememberNavController()
 
     NavHost(
