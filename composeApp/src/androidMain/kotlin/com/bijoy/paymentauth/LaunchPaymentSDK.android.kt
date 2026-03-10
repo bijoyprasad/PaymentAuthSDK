@@ -1,8 +1,8 @@
-package com.bijoy.paymentauth.platform
+package com.bijoy.paymentauth
 
 import com.bijoy.paymentauth.config.ActivityTracker
 import com.bijoy.paymentauth.config.PaymentInitializer
-import com.bijoy.paymentauth.manager.LaunchManager
+import com.bijoy.paymentauth.manager.ImagePickManager
 
 // androidMain
 actual fun launchPaymentSDK(
@@ -12,5 +12,5 @@ actual fun launchPaymentSDK(
     PaymentInitializer.onPaymentSuccess = onSuccess
     PaymentInitializer.onPaymentError = onError
     val context = ActivityTracker.requireCurrentActivity()
-    context.startActivity(LaunchManager.newIntent(context))
+    context.startActivity(ImagePickManager.newIntent(context))
 }

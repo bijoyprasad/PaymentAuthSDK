@@ -1,4 +1,4 @@
-package com.bijoy.paymentauth.platform
+package com.bijoy.paymentauth.manager
 
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_main_queue
@@ -16,7 +16,7 @@ fun setPaymentHandler(
     paymentHandler = handler
 }
 
-actual fun startNativePayment(
+fun startNativePayment(
     onSuccess: (paymentId: String) -> Unit,
     onError: (code: Int, message: String) -> Unit
 ) {

@@ -13,19 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
-            android:exported="true"
-            android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".manager.PaymentManager"
             android:exported="false" />
         <activity
-            android:name=".manager.LaunchManager"
+            android:name=".manager.ImagePickManager"
             android:exported="false" />
     </application>
 

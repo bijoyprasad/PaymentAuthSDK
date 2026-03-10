@@ -15,7 +15,7 @@ import com.bijoy.paymentauth.config.PaymentInitializer
 import com.bijoy.paymentauth.controller.Controller
 import com.bijoy.paymentauth.ui.App
 
-internal class LaunchManager : FragmentActivity() {
+internal class ImagePickManager : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +74,7 @@ internal class LaunchManager : FragmentActivity() {
         Controller.reset()
     }
 
-    companion object {
-        fun newIntent(context: Context) = Intent(context, LaunchManager::class.java)
+    companion object Companion {
+        fun newIntent(context: Context) = Intent(context, ImagePickManager::class.java)
     }
 }

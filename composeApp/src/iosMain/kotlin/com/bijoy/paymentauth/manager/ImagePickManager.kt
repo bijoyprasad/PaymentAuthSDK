@@ -1,4 +1,4 @@
-package com.bijoy.paymentauth.platform
+package com.bijoy.paymentauth.manager
 
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.toComposeImageBitmap
@@ -26,10 +26,15 @@ import platform.UIKit.UIViewController
 import platform.UIKit.UIWindow
 import platform.UIKit.UIWindowScene
 import platform.darwin.NSObject
+import platform.posix.memcpy
 
-actual fun imagePickAction(
+// Held strongly to prevent ARC garbage collection before callback fires
+private var activeDelegate: NSObject? = null
+
+fun imagePickAction(
     onResult: (ImageBitmap?) -> Unit
 ) {
+    // Capture ONCE before action sheet is presented
     val rootViewController = getTopViewController() ?: return
 
     val actionSheet = UIAlertController.alertControllerWithTitle(
@@ -46,7 +51,10 @@ actual fun imagePickAction(
             title = "Camera",
             style = UIAlertActionStyleDefault
         ) {
+            // Pass rootViewController in — don't call getTopViewController() again here
+            // as it would return the action sheet itself at this point
             presentPicker(
+                rootViewController = rootViewController,
                 sourceType = UIImagePickerControllerSourceType.UIImagePickerControllerSourceTypeCamera,
                 onResult = onResult
             )
@@ -58,6 +66,7 @@ actual fun imagePickAction(
         style = UIAlertActionStyleDefault
     ) {
         presentPicker(
+            rootViewController = rootViewController,
             sourceType = UIImagePickerControllerSourceType.UIImagePickerControllerSourceTypePhotoLibrary,
             onResult = onResult
         )
@@ -77,11 +86,10 @@ actual fun imagePickAction(
 
 @OptIn(ExperimentalForeignApi::class)
 private fun presentPicker(
+    rootViewController: UIViewController,
     sourceType: UIImagePickerControllerSourceType,
     onResult: (ImageBitmap?) -> Unit
 ) {
-    val rootViewController = getTopViewController() ?: return
-
     val picker = UIImagePickerController()
     picker.sourceType = sourceType
     picker.allowsEditing = false
@@ -100,13 +108,17 @@ private fun presentPicker(
             val imageBitmap = uiImage?.toImageBitmap()
             Controller.selectedImage.value = imageBitmap
             onResult(imageBitmap)
+            activeDelegate = null // release after done
         }
 
         override fun imagePickerControllerDidCancel(picker: UIImagePickerController) {
             picker.dismissViewControllerAnimated(true, completion = null)
             onResult(null)
+            activeDelegate = null
         }
     }
+
+    activeDelegate = delegate // retain strongly so ARC doesn't collect it before callback
     picker.delegate = delegate
 
     rootViewController.presentViewController(
@@ -137,7 +149,7 @@ private fun UIImage.toImageBitmap(): ImageBitmap? {
     val jpegData: NSData = UIImageJPEGRepresentation(this, 0.9) ?: return null
     val bytes = ByteArray(jpegData.length.toInt())
     bytes.usePinned { pinned ->
-        platform.posix.memcpy(pinned.addressOf(0), jpegData.bytes, jpegData.length)
+        memcpy(pinned.addressOf(0), jpegData.bytes, jpegData.length)
     }
     return Image.makeFromEncoded(bytes).toComposeImageBitmap()
 }
